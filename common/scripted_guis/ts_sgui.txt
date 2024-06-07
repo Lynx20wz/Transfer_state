@@ -12,13 +12,7 @@ scripted_gui = {
 					set_state_flag = transfer_state
 					set_temp_variable = {ts_number_demand_state = THIS}
 				}
-				if = {
-					limit = {ROOT = {is_subject = yes}}
-					ROOT = {overlord = {country_event= ts_demand.4}}
-				}
-				else = {
-					THIS.owner = {country_event = ts_demand.1}
-				}
+				THIS.owner = {country_event = ts_demand.1}
 			}
 		}
 
@@ -28,7 +22,14 @@ scripted_gui = {
 				THIS = {
 					set_state_flag = transfer_state
 					#owner = {country_event = ts_give.1}
-					ROOT = {country_event = ts_give.1}
+				}
+				if = {
+					limit = {ROOT = {is_subject = yes}}
+					ROOT.overlord = {country_event = ts_demand.4}
+					set_variable = {ROOT.ts_number_country_give = THIS.owner}
+				}
+				else = {
+					THIS.owner = {country_event = ts_demand.1}
 				}
 			}
 		}
@@ -67,6 +68,7 @@ scripted_gui = {
 					clr_state_flag = ts_give_state
 				}
 				set_variable = {ts_btn_give = 1}
+				#clear_variable = ROOT.ts_number_country_give
 			}
 		}
 		
@@ -90,7 +92,7 @@ scripted_gui = {
 					tooltip = ts.tt.neighbor_state_demand
 					OR = {
 						THIS = {
-							Any_neighbor_state = {is_owned_by = ROOT}
+							any_neighbor_state = {is_owned_by = ROOT}
 						}
 						AND = {
 							is_coastal = yes
@@ -121,9 +123,12 @@ scripted_gui = {
 					tooltip = ts.tt.neighbor_state_give
 					OR = {
 						THIS.owner = {
-							any_neighbor_country = {
-								original_tag = ROOT
-							}	
+							any_owned_state = {
+								any_neighbor_state = {
+									OR = {is_controlled_by = ROOT is_owned_by = ROOT}
+									has_state_flag = ts_give_state
+								}	
+							}
 						}
 						AND = {
 							THIS.owner = {

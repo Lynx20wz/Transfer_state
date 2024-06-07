@@ -19,6 +19,7 @@ add_namespace = ts_give
             name = ts.start.b
         }
     }
+
 #потребовать
     country_event = {
         id = ts_demand.1
@@ -94,7 +95,7 @@ add_namespace = ts_give
 
         option = {
             name = ts.demand_request_metropoly.a
-            ts_number_demand_state = {owner = {country_event = ts_demand.1}}
+            var:ROOT.ts_number_country_give = {country_event = ts_demand.1}
         }
 
         option = {
