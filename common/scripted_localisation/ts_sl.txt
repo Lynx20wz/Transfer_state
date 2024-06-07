@@ -1,15 +1,55 @@
 defined_text = {
     name = GiveState
     text = {
-        trigger = {
-			all_of_scopes = {
-				array = global.ts_give_state
-				has_state_flag = ts_give_state
-			}
+        trigger = { 
+            add_to_temp_variable = {qula = ROOT.ts_give_state^num}
+            check_variable = {
+                var = qula
+                value = 0
+                compare = equals
+            }
         }
-        localization_key = ts_give_state
+        localization_key = ts_give_not_selected
     }
     text = {
-        localization_key = ts_give_not_selected
+        trigger = { 
+            check_variable = {
+                var = qula
+                value = 1
+                compare = equals
+            }
+        }
+        localization_key = ts_give_state_1
+    }
+    text = {
+        trigger = { 
+            check_variable = {
+                var = qula
+                value = 2
+                compare = equals
+            }
+        }
+        localization_key = ts_give_state_2
+    }
+    text = {
+        trigger = { 
+            check_variable = {
+                var = qula
+                value = 3
+                compare = equals
+            }
+        }
+        localization_key = ts_give_state_3
+    }
+    text = {
+        trigger = { 
+            check_variable = {
+                var = qula
+                value = 4
+                compare = greater_than_or_equals
+            }
+            subtract_from_temp_variable = {qula = 3}
+        }
+        localization_key = ts_give_state_3_and_bolee
     }
 }

@@ -19,17 +19,13 @@ scripted_gui = {
 		#Эффект кнопки отдать
 		effects = {
 			btn_ts_give_click = {
-				THIS = {
-					set_state_flag = transfer_state
-					#owner = {country_event = ts_give.1}
-				}
 				if = {
 					limit = {ROOT = {is_subject = yes}}
 					ROOT.overlord = {country_event = ts_demand.4}
 					set_variable = {ROOT.ts_number_country_give = THIS.owner}
 				}
 				else = {
-					THIS.owner = {country_event = ts_demand.1}
+					THIS.owner = {country_event = ts_give.1}
 				}
 			}
 		}
@@ -48,15 +44,13 @@ scripted_gui = {
 					THIS = {set_state_flag = ts_give_state}
 					set_variable = {ts_btn_give = 2}
 					set_temp_variable = {ts_give_number_state_var = THIS}
-					add_to_array = {global.ts_give_number_state = ts_give_number_state_var}
-					add_to_array = {global.ts_give_state = THIS}
+					add_to_array = {ROOT.ts_give_state = THIS}
 				}
 				else = {
 					clr_state_flag = ts_give_state
 					set_variable = {ts_btn_give = 1}	
-					remove_from_array = {global.ts_give_state = THIS}
-					clear_array = global.ts_give_state
-					clear_array = global.ts_give_number_state
+					remove_from_array = {ROOT.ts_give_state = THIS}
+					clear_array = ROOT.ts_give_state
 				}
 			}
 		}
@@ -66,9 +60,9 @@ scripted_gui = {
 				every_state = {
 					limit = {has_state_flag = ts_give_state}
 					clr_state_flag = ts_give_state
+					set_variable = {ts_btn_give = 1}
 				}
-				set_variable = {ts_btn_give = 1}
-				#clear_variable = ROOT.ts_number_country_give
+				clear_array = ROOT.ts_give_state
 			}
 		}
 		

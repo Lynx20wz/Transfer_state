@@ -2,24 +2,27 @@
 
 #debug_show_decisions: "[?ts_number_give_state^0.GetName]"
 
-ts_give_state: "выбрано для сдачи"
+ts_give_state_1: "[?ROOT.ts_give_state^0.GetName]"
+ts_give_state_2: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName]"
+ts_give_state_3: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^1.GetName]"
+ts_give_state_3_and_bolee: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^2.GetName] и ещё [?qula]"
 ts_give_not_selected: "§Rне выбрано§!"
 
 #tt кнопок
   Ts_btn_demand_tt: "Запросите регион: §Y[THIS.GetName]§! у государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_demand_click_enabled]"
 
-  Ts_btn_give_tt: "Отдайте регион(ы): §Y[?global.ts_give_state^global.ts_give_state.GetName]§! во владение государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_give_click_enabled]\n§YЭффекты§!:\n[!btn_ts_give_click]"
+  Ts_btn_give_tt: "Отдайте регион(ы): §Y[GiveState]§! во владение государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_give_click_enabled]\n§YЭффекты§!:\n[!btn_ts_give_click]"
 
   Ts_btn_selected_tt: "Выбрать §Y[THIS.GetName]§! как регион для сдачи\n\n§YТребования§!:\n[!btn_ts_selected_give_state_click_enabled]"
 
-  Ts_btn_remove_selected_tt: "Отмените все выделенные регионы ([?global.ts_give_state^global.ts_give_state.GetName])"
+  Ts_btn_remove_selected_tt: "Отмените все выделенные регионы ([GiveState])"
 
 #tt требований
   ts.tt.no_capital: "Регион §Y[THIS.GetName]§!: не является столицей государства [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§!"
   ts.tt.war_with: "Владелец региона §Y[PREV.GetName]§!: в состоянии мира с: [ROOT.owner.GetFlag]§Y[ROOT.GetName]§!"
   ts.tt.has_opinion: "Владелец региона §Y[PREV.GetName]§!: Мнение о государстве [ROOT.owner.GetFlag]§Y[ROOT.GetName]§! хотя бы §Y1§!"
   ts.tt.neighbor_state_demand: "Одно из условий должно выполнятся:\n  Регион: §Y[THIS.GetName]§! имеет общую наземную границу хотя бы с одним из наших регионов.\n  Регион §Y[THIS.GetName]§! имеет выход к морю как и любой наш регион."
-  ts.tt.neighbor_state_give: "Одно из условий должно выполнятся:\n §Y[THIS.owner.GetFlag][THIS.owner.GetName]§! имеет общую наземную границу с передаваемым(и) регионом(ами): §Y[?global.ts_give_state^global.ts_give_state.GetName]§!.\n  §Y[THIS.owner.GetFlag][THIS.owner.GetName]§! имеет выход к морю как и передаваемый(ые) регион(ы): §Y[?global.ts_give_state^global.ts_give_state.GetName]§!."
+  ts.tt.neighbor_state_give: "Одно из условий должно выполнятся:\n §Y[THIS.owner.GetFlag][THIS.owner.GetName]§! имеет общую наземную границу с передаваемым(и) регионом(ами): §Y[?ROOT.ts_give_state^ROOT.ts_give_state.GetName]§!.\n  §Y[THIS.owner.GetFlag][THIS.owner.GetName]§! имеет выход к морю как и передаваемый(ые) регион(ы): §Y[?ROOT.ts_give_state^ROOT.ts_give_state.GetName]§!."
 
 #ивенты
 
@@ -36,32 +39,32 @@ ts_give_not_selected: "§Rне выбрано§!"
     ts.demand.a: "Уступить"
     ts.demand.b: "Отказать"
 
-    ts.demand_reply_agreed.t: "[FROM.GetName] отказала нам!"
-    ts.demand_reply_agreed.d: "[FROM.GetAdjective]ие политики решили не передавать нам [?ts_number_demand_state.GetName]"
-    ts.demand_reply_agreed.a: ""
+    ts.demand_reply_agreed.t: "[FROM.GetName] пошла на уступки"
+    ts.demand_reply_agreed.d: "[FROM.GetAdjective]ие политики решили что передача данных регионов предотвратит очередной конфликт."
+    ts.demand_reply_agreed.a: "Хорошо!"
 
 
     ts.demand_reply_denied.t: "[FROM.GetName] отказала нам!"
-    ts.demand_reply_denied.d: "[FROM.GetAdjective]ие политики решили не передавать нам [?ts_number_demand_state.GetName]"
-    ts.demand_reply_denied.a: ""
+    ts.demand_reply_denied.d: "[FROM.GetAdjective]ие политики решили не передавать нам регионы"
+    ts.demand_reply_denied.a: "Мы им покажем!"
 
     ts.demand_request_metropoly.t: "Наша марионтека хочет"
-    ts.demand_request_metropoly.d: "Одна из наших маронеток (§B[FROM.GetFlag][FROM.GetName]§!) хочет передать следующие регионы: §B[?global.ts_give_state^global.ts_give_state.GetName]§!, государству: §B[?ROOT.ts_number_country_give.GetFlag][?ROOT.ts_number_country_give.GetName]§!."
+    ts.demand_request_metropoly.d: "Одна из наших маронеток (§B[FROM.GetFlag][FROM.GetName]§!) хочет передать следующие регионы: §B[?ROOT.ts_give_state^ROOT.ts_give_state.GetName]§!, государству: §B[?ROOT.ts_number_country_give.GetFlag][?ROOT.ts_number_country_give.GetName]§!."
     ts.demand_request_metropoly.a: "Пускай!"
     ts.demand_request_metropoly.b: "Не имеют права!"
 
 
   #отдать
     ts.give.t: "[FROM.GetName] предлагает"
-    ts.give.d: "[ROOT.GetName] предлагает нам регион(ы): [ts_number_give_state^0]"
+    ts.give.d: "[ROOT.GetName] предлагает нам регион(ы): [GiveState]"
     ts.give.a: "Принять"
     ts.give.b: "Отклонить"
 
-    ts.give_reply_agreed.t: ""
-    ts.give_reply_agreed.d: ""
-    ts.give_reply_agreed.a: ""
+    ts.give_reply_agreed.t: "[FROM.GetName] приняла наш дар"
+    ts.give_reply_agreed.d: "[FROM.GetAdjective]ие политики дали положительный ответ на наше предложение."
+    ts.give_reply_agreed.a: "Вот и хорошо"
 
-    ts.give_reply_denied.t: ""
-    ts.give_reply_denied.d: ""
-    ts.give_reply_denied.a: ""
+    ts.give_reply_denied.t: "[FROM.GetName] отказалась"
+    ts.give_reply_denied.d: "[FROM.GetAdjective]ие политики счели не нужным принимать наше предложение."
+    ts.give_reply_denied.a: "Ну и ладно"
 

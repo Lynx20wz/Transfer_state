@@ -36,9 +36,9 @@ add_namespace = ts_give
                 limit = {
                     has_state_flag = transfer_state
                 }
+                clr_state_flag = transfer_state
                 transfer_state_to = FROM
                 add_core_of = FROM
-                clr_state_flag = transfer_state
             }
             FROM = {country_event = ts_demand.2}
         }
@@ -95,7 +95,7 @@ add_namespace = ts_give
 
         option = {
             name = ts.demand_request_metropoly.a
-            var:ROOT.ts_number_country_give = {country_event = ts_demand.1}
+            var:ROOT.ts_number_country_give = {country_event = ts_give.1}
         }
 
         option = {
@@ -121,6 +121,7 @@ add_namespace = ts_give
                 }
                 transfer_state_to = ROOT
                 add_core_of = ROOT
+                set_variable = {ts_btn_give = 1}
                 clr_state_flag = ts_give_state
             }
             FROM = {country_event = ts_give.2}
@@ -129,6 +130,12 @@ add_namespace = ts_give
         option = {
             name = ts.give.b
             FROM = {country_event = ts_give.3}
+            every_state = {
+                limit = {
+                    has_state_flag = transfer_state
+                }
+                clr_state_flag = transfer_state
+            } 
         }
     }
 
