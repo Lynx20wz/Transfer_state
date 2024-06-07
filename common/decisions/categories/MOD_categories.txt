@@ -1,0 +1,6 @@
+debug_ts = {
+	priority = 100
+	visible = {
+		is_debug = yes
+	}
+}

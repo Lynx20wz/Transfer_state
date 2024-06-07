@@ -1,0 +1,7 @@
+any_give_state = {
+	all_owned_state = {
+		has_state_flag = ts_give_state
+		is_coastal = yes
+	}
+	
+}

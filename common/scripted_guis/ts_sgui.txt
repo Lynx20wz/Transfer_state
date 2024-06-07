@@ -1,0 +1,189 @@
+scripted_gui = {
+
+	Ts_sg = {
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		window_name = "container_ts"
+
+		#Эффект кнопки потребовать
+		effects = {
+			btn_ts_demand_click = {
+				THIS = {
+					set_state_flag = transfer_state
+					set_temp_variable = {ts_number_demand_state = THIS}
+				}
+				if = {
+					limit = {ROOT = {is_subject = yes}}
+					ROOT = {overlord = {country_event= ts_demand.4}}
+				}
+				else = {
+					THIS.owner = {country_event = ts_demand.1}
+				}
+			}
+		}
+
+		#Эффект кнопки отдать
+		effects = {
+			btn_ts_give_click = {
+				THIS = {
+					set_state_flag = transfer_state
+					#owner = {country_event = ts_give.1}
+					ROOT = {country_event = ts_give.1}
+				}
+			}
+		}
+
+		#Эффект кнопки отметить регион
+		effects = {
+			btn_ts_selected_give_state_click = {
+				if = {
+					limit = {
+						THIS = {
+							NOT = {
+								has_state_flag = ts_give_state
+							}
+						}
+					}
+					THIS = {set_state_flag = ts_give_state}
+					set_variable = {ts_btn_give = 2}
+					set_temp_variable = {ts_give_number_state_var = THIS}
+					add_to_array = {global.ts_give_number_state = ts_give_number_state_var}
+					add_to_array = {global.ts_give_state = THIS}
+				}
+				else = {
+					clr_state_flag = ts_give_state
+					set_variable = {ts_btn_give = 1}	
+					remove_from_array = {global.ts_give_state = THIS}
+					clear_array = global.ts_give_state
+					clear_array = global.ts_give_number_state
+				}
+			}
+		}
+
+		effects = {
+			btn_ts_remove_selected_give_state_click = {
+				every_state = {
+					limit = {has_state_flag = ts_give_state}
+					clr_state_flag = ts_give_state
+				}
+				set_variable = {ts_btn_give = 1}
+			}
+		}
+		
+		#тригеры
+		triggers = {
+			#когда кнопка потребовать активна
+			btn_ts_demand_click_enabled = {
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.no_capital
+					PREV = {THIS = {is_capital = no}}
+				}
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.war_with
+					owner = {NOT = {has_war_with = ROOT}}
+				}
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.has_opinion
+					owner = {has_opinion = {target = ROOT value > 0}}
+				}
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.neighbor_state_demand
+					OR = {
+						THIS = {
+							Any_neighbor_state = {is_owned_by = ROOT}
+						}
+						AND = {
+							is_coastal = yes
+							ROOT = {
+								any_owned_state = {
+									is_coastal = yes
+								}
+							}
+						}
+					}
+				}
+			}
+
+			#когда кнопка потребовать видна
+			btn_ts_demand_visible = {
+				NOT = {OR = {is_controlled_by = ROOT is_owned_by = ROOT} }
+			}
+
+			#когда кнопка отдать активна
+			btn_ts_give_click_enabled = {
+				ROOT = {
+					any_owned_state = {
+						has_state_flag = ts_give_state
+					}
+				}
+
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.neighbor_state_give
+					OR = {
+						THIS.owner = {
+							any_neighbor_country = {
+								original_tag = ROOT
+							}	
+						}
+						AND = {
+							THIS.owner = {
+								any_owned_state = {
+									is_coastal = yes
+								}
+							}
+							ROOT = {
+								any_owned_state = {
+									has_state_flag = ts_give_state
+									is_coastal = yes
+								}
+							}
+						}
+					}
+				}
+			}
+				
+
+			#когда кнопка отдать видна
+			btn_ts_give_visible = {
+				NOT = {OR = {is_controlled_by = ROOT is_owned_by = ROOT}}
+			}
+
+			#когда кнопка отметить регион активна
+			btn_ts_selected_give_state_click_enabled = {
+				custom_trigger_tooltip = {
+					tooltip = ts.tt.no_capital
+					is_capital = no	
+				}
+			}	
+
+			#когда кнопка отметить регион видна
+			btn_ts_selected_give_state_visible = {
+				OR = {is_controlled_by = ROOT is_owned_by = ROOT}
+			}
+
+			#когда кнопка оменить отметки регионов активна
+			btn_ts_remove_selected_give_state_click_enabled = {
+			}
+
+			#когда кнопка оменить отметки регионов видна
+			btn_ts_remove_selected_give_state_visible = {
+				OR = {is_controlled_by = ROOT is_owned_by = ROOT}
+				ROOT = {
+					any_owned_state = {
+						has_state_flag = ts_give_state
+					}
+				}
+			}
+		}
+
+		properties = {
+			btn_ts_selected_give_state = {
+				frame = ts_btn_give
+			}
+		}
+		
+		ai_enabled = {
+			has_global_flag = activate_ts
+		}
+	}
+}

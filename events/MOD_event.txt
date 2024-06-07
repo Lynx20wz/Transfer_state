@@ -1,0 +1,158 @@
+add_namespace = ts
+add_namespace = ts_demand
+add_namespace = ts_give
+
+    country_event = {
+        id = ts.start
+        title = ts.start.t
+        desc = ts.start.d
+        #picture = 
+
+        is_triggered_only = yes
+        fire_only_once = yes
+
+        option = {
+            name = ts.start.a
+            set_global_flag = activate_ts
+        }
+        option = {
+            name = ts.start.b
+        }
+    }
+#потребовать
+    country_event = {
+        id = ts_demand.1
+        title = ts.demand.t
+        desc =  ts.demand.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            name = ts.demand.a
+            ai_chance = {base = 100}
+            every_state = {
+                limit = {
+                    has_state_flag = transfer_state
+                }
+                transfer_state_to = FROM
+                add_core_of = FROM
+                clr_state_flag = transfer_state
+            }
+            FROM = {country_event = ts_demand.2}
+        }
+
+        option = {
+            name = ts.demand.b
+            FROM = {country_event = ts_demand.3}
+            hidden_effect = {
+                every_state = {
+                    limit = {
+                        has_state_flag = transfer_state
+                    }
+                    clr_state_flag = transfer_state
+                } 
+            }   
+        }
+    }
+
+    country_event = {
+        id = ts_demand.2
+        title = ts.demand_reply_agreed.t
+        desc =  ts.demand_reply_agreed.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            #clear_variable = ts_number_demand_state_var
+            name = ts.demand_reply_agreed.a
+        }
+    }
+
+    country_event = {
+        id = ts_demand.3
+        title = ts.demand_reply_denied.t
+        desc =  ts.demand_reply_denied.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            #clear_variable = ts_number_demand_state_var
+            name = ts.demand_reply_denied.a
+        }
+    }
+
+    country_event = {
+        id = ts_demand.4
+        title = ts.demand_request_metropoly.t
+        desc =  ts.demand_request_metropoly.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            name = ts.demand_request_metropoly.a
+            ts_number_demand_state = {owner = {country_event = ts_demand.1}}
+        }
+
+        option = {
+            name = ts.demand_request_metropoly.b
+        }
+    }
+
+#отдать
+    country_event = {
+        id = ts_give.1  
+        title = ts.give.t
+        desc =  ts.give.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            name = ts.give.a
+            ai_chance = {base = 100}
+            every_state = {
+                limit = {
+                    has_state_flag = ts_give_state
+                }
+                transfer_state_to = ROOT
+                add_core_of = ROOT
+                clr_state_flag = ts_give_state
+            }
+            FROM = {country_event = ts_give.2}
+        }
+
+        option = {
+            name = ts.give.b
+            FROM = {country_event = ts_give.3}
+        }
+    }
+
+    country_event = {
+        id = ts_give.2
+        title = ts.give_reply_agreed.t
+        desc =  ts.give_reply_agreed.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            name = ts.give_reply_agreed.a
+        }
+    }
+
+    country_event = {
+        id = ts_give.3      
+        title = ts.give_reply_denied.t
+        desc =  ts.give_reply_denied.d
+        #picture = GFX_
+
+        is_triggered_only = yes
+
+        option = {
+            name = ts.give_reply_denied.a
+        }
+    }

@@ -1,0 +1,13 @@
+debug_ts = {
+	debug_array = {
+		visible = {
+			is_debug = yes
+		}
+
+		on_map_mode = map_and_decisions_view
+		state_target = yes
+		target_trigger = {
+			any_give_state = yes
+		}
+	}
+}

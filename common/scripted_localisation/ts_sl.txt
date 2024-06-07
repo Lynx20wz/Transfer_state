@@ -1,0 +1,15 @@
+defined_text = {
+    name = GiveState
+    text = {
+        trigger = {
+			all_of_scopes = {
+				array = global.ts_give_state
+				has_state_flag = ts_give_state
+			}
+        }
+        localization_key = ts_give_state
+    }
+    text = {
+        localization_key = ts_give_not_selected
+    }
+}
