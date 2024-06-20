@@ -1,7 +1,19 @@
 defined_text = {
     name = GiveState
+    #text = {
+    #    trigger = { 
+    #        set_temp_variable = {qula = ROOT.ts_give_state^num}
+    #        add_to_temp_variable = {qula = 1}
+    #        all_of = {
+    #            array = ROOT.ts_btn_give
+    #            index = i
+    #        }
+    #    }
+    #    localization_key =  ts_give_tt
+    #}
     text = {
         trigger = { 
+            set_temp_variable = {qula = ROOT.ts_give_state^num}
             add_to_temp_variable = {qula = ROOT.ts_give_state^num}
             check_variable = {
                 var = qula

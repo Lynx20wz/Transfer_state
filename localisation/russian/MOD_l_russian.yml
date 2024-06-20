@@ -1,21 +1,24 @@
 ﻿l_russian:
 
 #debug_show_decisions: "[?ts_number_give_state^0.GetName]"
+ts_give_state: "выбрано для сдачи"
 
-ts_give_state_1: "[?ROOT.ts_give_state^0.GetName]"
-ts_give_state_2: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName]"
-ts_give_state_3: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^1.GetName]"
-ts_give_state_3_and_bolee: "[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^2.GetName] и ещё [?qula]"
-ts_give_not_selected: "§Rне выбрано§!"
+#scripted loc
+  ts_give_tt: " §Y[?ROOT.ts_give_state^i*ROOT.ts_give_state^num.GetName]§!"
+  ts_give_state_1: ": §Y[?ROOT.ts_give_state^0.GetName]§!"
+  ts_give_state_2: "ы: §Y[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName]§!"
+  ts_give_state_3: "ы: §Y[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^2.GetName]§!"
+  ts_give_state_3_and_bolee: "ы: §Y[?ROOT.ts_give_state^0.GetName], [?ROOT.ts_give_state^1.GetName], [?ROOT.ts_give_state^2.GetName]§! §Yи ещё [?qula]§!"
+  ts_give_not_selected: " §Rне выбрано§!"
 
 #tt кнопок
   Ts_btn_demand_tt: "Запросите регион: §Y[THIS.GetName]§! у государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_demand_click_enabled]"
 
-  Ts_btn_give_tt: "Отдайте регион(ы): §Y[GiveState]§! во владение государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_give_click_enabled]\n§YЭффекты§!:\n[!btn_ts_give_click]"
+  Ts_btn_give_tt: "Отдайте регион[GiveState] во владение государства: [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§! \n\n§YТребования§!:\n[!btn_ts_give_click_enabled]\n§YЭффекты§!:\n[!btn_ts_give_click]"
 
   Ts_btn_selected_tt: "Выбрать §Y[THIS.GetName]§! как регион для сдачи\n\n§YТребования§!:\n[!btn_ts_selected_give_state_click_enabled]"
 
-  Ts_btn_remove_selected_tt: "Отмените все выделенные регионы ([GiveState])"
+  Ts_btn_remove_selected_tt: "Отмените все выделенные регион[GiveState]"
 
 #tt требований
   ts.tt.no_capital: "Регион §Y[THIS.GetName]§!: не является столицей государства [THIS.owner.GetFlag]§Y[THIS.owner.GetName]§!"

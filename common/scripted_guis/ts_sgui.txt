@@ -23,6 +23,7 @@ scripted_gui = {
 					limit = {ROOT = {is_subject = yes}}
 					ROOT.overlord = {country_event = ts_demand.4}
 					set_variable = {ROOT.ts_number_country_give = THIS.owner}
+					clear_array = ROOT.ts_btn_give
 				}
 				else = {
 					THIS.owner = {country_event = ts_give.1}
